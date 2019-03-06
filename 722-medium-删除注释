@@ -1,0 +1,22 @@
+import re
+class Solution:
+    def removeComments(self, source: List[str]) -> List[str]:
+        pattern1 = re.compile('\/\/.*')
+        pattern2 = re.compile('\/\*[\S\s]*?\*\/')
+        for i in range(len(source)):
+            source[i] = re.sub(pattern1, '', source[i])
+        string = '.'.join(source)
+        string = re.sub(pattern2, '', string)
+        source = string.split(".")
+        while '' in source:
+            source.remove('')
+        return source
+
+if __name__ == '__main__':
+    source = ["/*Test program */", "int main()", "{ ", "  // variable declaration ", "int a, b, c;", "/* This is a test", "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"]
+    de = Solution()
+    de.removeComments(source)
+    print(source)
+    
+//  已完成
+//执行用时: 52 ms
