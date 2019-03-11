@@ -18,5 +18,32 @@ if __name__ == '__main__':
     de.removeComments(source)
     print(source)
     
-//  已完成
-//执行用时: 52 ms
+#  已完成
+#执行用时: 52 ms
+# 发现大错特错了lol
+# down了一个解
+class Solution:
+    def removeComments(self, source: List[str]) -> List[str]:
+        res = []
+        multi = False #多行
+        line = ''
+        for i in source:
+            l = 0
+            while l < len(i):
+                if not multi:
+                    if i[l] == '/' and l < len(i)-1 and i[l+1] == '/':
+                        break
+                    elif i[l] == '/' and l < len(i)-1 and i[l+1] == '*':
+                        multi = True
+                        l += 1
+                    else:
+                        line += i[l]
+                else:
+                    if i[l] == '*' and l < len(i)-1 and i[l+1] == '/':
+                        multi = False
+                        l += 1
+                l += 1
+            if not multi and line:
+                res.append(line)
+                line = ''
+        return res
