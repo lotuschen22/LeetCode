@@ -18,4 +18,18 @@ class Solution:
 # 就是下一步 顺时针逆时针都是可以的 但是之后的步数不同
 # 一开始写的（小学生）错误代码==
 
-
+class Solution:
+    def findRotateSteps(self, ring: str, key: str) -> int:
+        n = len(ring)
+        count = 0
+        for i in range(len(key)):
+            count1 = ring.find(key[i])+1
+            ring_reverse = ring[0]+ring[(n-1):0:-1]
+            count2 = ring_reverse.find(key[i])+1
+            if count1 > count2:
+                count += count2
+                ring = ring[(n-count2+1):]+ring[:(n-count2+1)]
+            else:
+                count += count1
+                ring = ring[(count1-1):]+ring[:(count1-1)]
+        return count
