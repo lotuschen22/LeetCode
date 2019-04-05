@@ -11,4 +11,11 @@ class Solution:
             pre = c
         return min(dp[i] for i in indexes[key[-1]])
 
-# 
+# 有一个测试用例需要注意一下：
+# Input: ring = "nyngl", key = "yyynnnnnnlllggg"
+# 可以发现，打完y，再打n时，发现顺时针和逆时针都可以到n。选哪个呢？这时候需要根据之后的字母离得跟哪个n比较近来抉择。
+# 一开始写的程序没有办法解决这个问题
+# 就是下一步 顺时针逆时针都是可以的 但是之后的步数不同
+# 一开始写的（小学生）错误代码==
+
+
