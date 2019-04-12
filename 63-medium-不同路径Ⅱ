@@ -1,0 +1,21 @@
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+        tmp = [[0 for i in range(n)] for j in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if obstacleGrid[i][j] != 0:
+                    tmp[i][j] = 0
+                elif i == 0 and j != 0:
+                    tmp[i][j] = tmp[i][j-1]
+                elif i!= 0 and j == 0:
+                    tmp[i][j] = tmp[i-1][j]
+                elif i == 0 and j==0:
+                    tmp[i][j] = 1
+                else:
+                    tmp[i][j] = tmp[i-1][j]+tmp[i][j-1]
+        return tmp[m-1][n-1]
+
+# Runtime: 40 ms, faster than 71.74% of Python3 online submissions for Unique Paths II.
+# Memory Usage: 13.2 MB, less than 5.19% of Python3 online submissions for Unique Paths II.
