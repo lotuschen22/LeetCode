@@ -1,0 +1,17 @@
+class Solution:
+    def licenseKeyFormatting(self, S: str, K: int) -> str:
+        l = len(S)
+        n = S.count('-')
+        m = l-n
+        S = S.replace('-','')
+        if m > K:
+            m1 = m%K
+            S2 = S[m1:]
+            pattern = re.compile('.{'+str(K)+'}')
+            S2 = '-'.join(pattern.findall(S2))
+            if m1 == 0:
+                S = S2
+            else:
+                S = S[:m1]+'-'+S2
+        S = S.upper()
+        return S
